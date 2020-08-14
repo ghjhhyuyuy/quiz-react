@@ -3,28 +3,14 @@ import Product from './Product';
 class Mail extends Component {
   state = {
     products:[
-      {
-        url: "img/kele.jpg",
-        name: "可乐",
-        price: 1
-      },
-      {
-        url: "img/kele1.jpg",
-        name: "可乐1",
-        price: 1
-      }
+
     ]
   }
   successCallback = (text) => {
-    this.setState = {
-      products:[
-        {
-          url: text.imgUrl,
-        name: text.productName,
-        price: text.price
-        }
-      ]
-    }
+    text = JSON.parse(text);
+    this.setState({
+      products: text
+    })
   }
   componentDidMount(){
     const url = "http://127.0.0.1:8080/products"
@@ -40,9 +26,9 @@ class Mail extends Component {
   }
     render() {
         return (
-          this.state.products.map(item => <Product 
-            url={item.url} 
-            name={item.name} 
+          this.state.products?.map(item => <Product 
+            url={item.imgUrl} 
+            name={item.productName} 
             price={item.price} 
             key={item.name}/>)
         );
